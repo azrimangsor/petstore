@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "cypress-plugin-api": "^2.11.2",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/ajv": "^1.0.4",
+    "ajv": "^8.17.1",
+    "cypress": "^13.15.2",
+    "cypress-mochawesome-reporter": "^3.8.2"
+  },
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:chrome": "cypress run --browser chrome",
+    "cypress:run:spec": "cypress run --browser chrome --spec cypress/e2e/api.spec.cy.ts",
+    "cypress:run:perf": "cypress run --browser chrome --spec cypress/e2e/performance.spec.cy.ts",
+    "cypress:all:cloud": "cypress run --browser chrome --record --key 048a918b-490c-4c1b-a1af-401bdec8ac56",
+    "cypress:run:cloudPerf": "cypress run --browser chrome --record --key 048a918b-490c-4c1b-a1af-401bdec8ac56 --spec cypress/e2e/performance.spec.cy.ts",
+    "delete:reports": "rm cypress/results/* || true",
+    "combine:reports": "jrm cypress/results/combined-report.xml \"cypress/results/*.xml\"",
+    "prereport": "npm run delete:reports",
+    "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
+    "postreport": "npm run combine:reports"
+  }
+}

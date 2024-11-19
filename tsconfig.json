@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "lib": ["es2019", "dom"],
+      "types": ["cypress"],
+      "typeRoots": ["node_modules/@types"],
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "esModuleInterop": true
+    },
+    "include": ["cypress/**/*.ts"]
+  }
+  

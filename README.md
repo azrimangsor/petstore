@@ -78,6 +78,12 @@ export default defineConfig({
 
 ---
 
+## **Documentation**
+
+For detailed information about the testing process, scenarios, and planning, refer to the **[Master Test Plan](./Petstore_Test_Plan.docx)**.
+
+---
+
 ## **File Structure**
 
 ```

@@ -1,7 +1,3 @@
-Here’s a professional `README.md` template for your Petstore API testing project:
-
----
-
 # **Petstore API Testing with Cypress**
 
 This repository contains an automated test suite developed using Cypress and TypeScript to test the functionality, reliability, and compliance of the [Swagger Petstore API](https://petstore.swagger.io/). The suite includes tests for CRUD operations, data validation, response schema verification, and authorization scenarios.
@@ -71,7 +67,7 @@ npx cypress run
 ```
 
 ### **4. Environment Configuration**
-Ensure your `cypress.config.ts` is correctly configured with the base URL:
+Ensure `cypress.config.ts` is correctly configured with the base URL:
 ```typescript
 export default defineConfig({
   e2e: {
@@ -139,7 +135,3 @@ Contributions are welcome! Please fork the repository and create a pull request 
 ## **License**
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for more details.
-
----
-
-Let me know if you’d like me to tweak this or include additional details.

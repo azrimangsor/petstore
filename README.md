@@ -71,7 +71,7 @@ To run ONLY the API Test:
 npm run cypress:run:spec
 ```
 
-To run ONLY the API Test:
+To run ONLY the Performance Test:
 ```bash
 npm run cypress:run:perf
 ```

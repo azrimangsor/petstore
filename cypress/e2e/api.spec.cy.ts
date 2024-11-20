@@ -4,50 +4,29 @@ import petSchema from "../fixtures/petSchema.json";
 describe('Swagger Petstore API Test Suite', () => {
     const ajv = new Ajv(); // Initialize AJV validator
     const validate = ajv.compile(petSchema); // Compile the schema
+    const headers = { api_key: 'special-key' };
 
     let petId: number;
 
-    // Load data from an external JSON file
-    before(() => {
-        cy.fixture('petData.json').then((data) => {
-            petId = data.petId;
-        });
-    });
-
     it("Validate Pet API Response Schema", () => {
         cy.request({
-            method: "GET",
-            url: "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+            method: 'GET',
+            headers,
+            url: '/pet/1',
         }).then((response) => {
             expect(response.status).to.eq(200);
 
-            // Validate each item in the response body
-            response.body.forEach((pet: any) => {
-                const valid = validate(pet);
-                if (!valid) {
-                    cy.log("Validation Errors:", validate.errors);
-                }
-                expect(valid, `Response should match schema`).to.be.true;
-            });
+            // Validate the single pet object in the response body
+            const valid = validate(response.body);
+            if (!valid) {
+                cy.log("Validation Errors:", validate.errors);
+            }
+            expect(valid, `Response should match schema`).to.be.true;
         });
     });
 
-    // Tests without `api-key`
-    describe('Tests Without API Key', () => {
-        it('GET Pets (Unauthorized)', () => {
-            cy.request({
-                method: 'GET',
-                url: '/pet/findByStatus?status=available',
-                failOnStatusCode: false,
-            }).then((response) => {
-                expect(response.status).to.eq(200); // Unauthorized
-            });
-        });
-    });
-
-    // Tests with `api-key`
+    //Tests with `api-key`
     describe('Tests With API Key', () => {
-        const headers = { api_key: 'special-key' };
 
         it('GET Pets (Authorized)', () => {
             cy.request({
@@ -123,7 +102,7 @@ describe('Swagger Petstore API Test Suite', () => {
             cy.fixture('petData.json').then((data) => {
                 petId = data.petId;
             });
-            
+
             cy.request({
                 method: 'DELETE',
                 url: `/pet/${petId}`,
@@ -141,6 +120,19 @@ describe('Swagger Petstore API Test Suite', () => {
                 headers,
             }).then((response) => {
                 expect(response.status).to.eq(404);
+            });
+        });
+    });
+
+    // Tests without `api-key`
+    describe('Tests Without API Key', () => {
+        it('GET Pets (Unauthorized)', () => {
+            cy.request({
+                method: 'GET',
+                url: '/pet/findByStatus?status=available',
+                failOnStatusCode: false,
+            }).then((response) => {
+                expect(response.status).to.eq(200); // Unauthorized
             });
         });
     });

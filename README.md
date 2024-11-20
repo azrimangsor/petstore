@@ -66,6 +66,16 @@ To run tests in headless mode:
 npx cypress run
 ```
 
+To run ONLY the API Test:
+```bash
+npm run cypress:run:spec
+```
+
+To run ONLY the API Test:
+```bash
+npm run cypress:run:perf
+```
+
 ### **4. Environment Configuration**
 Ensure `cypress.config.ts` is correctly configured with the base URL:
 ```typescript
